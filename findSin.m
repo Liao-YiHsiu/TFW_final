@@ -1,6 +1,6 @@
 function [mask, value, F, T] =  findSin(x, fs)
 
-   NSR = -4;
+   NSR = log(10000);
    N = round(0.02 * fs);
    [S F T] = spectrogram(x, gausswin(N, 4), round(N/2), pow2(nextpow2(N)+2), fs);
    
@@ -10,7 +10,7 @@ function [mask, value, F, T] =  findSin(x, fs)
 
    log_S = log(abs(S));
 
-   thres_S = max(max(log_S)) + NSR;
+   thres_S = min(min(log_S)) + NSR;
    
    %mask = zeros(size(S));
    mask = false(size(S));
@@ -20,9 +20,11 @@ function [mask, value, F, T] =  findSin(x, fs)
       [pks, locs] = findpeaks(log_S(:, j));
       %locs = locs(pks > thres_S);
       tmp = locs(pks > thres_S);
+      %tmp = locs;
       mask(tmp , j) = true;
       value(tmp, j) = S(tmp, j);
    end
+
 
    mask = bwareaopen(mask, 6, 8);
    for j = 1:size(mask, 2)

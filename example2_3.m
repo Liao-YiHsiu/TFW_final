@@ -2,10 +2,10 @@ t = 0:1e-4:0.1;
 x = sin(2*pi*440*t) + sin(2*pi*490*t);
 
 show('x[n] without zero padding', t, x, false, false, false, [-40, 5], 1000, true);
-print('wzero', '-dpng', '-r300');
+print('wozero', '-dpng', '-r300');
 
 show('x[n] with zero padding', t, x, false, false, true, [-40, 5], 1000, true);
-print('wozero', '-dpng', '-r300');
+print('wzero', '-dpng', '-r300');
 
 %peak detection
 figure

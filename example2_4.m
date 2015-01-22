@@ -1,4 +1,5 @@
-[a1 fs] = wavread('harpsi-cs.wav');
+%[a1 fs] = wavread('harpsi-cs.wav');
+[a1 fs] = wavread('piano.wav');
 
 x = a1(:, 1)';
 
